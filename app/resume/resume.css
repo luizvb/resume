@@ -1,0 +1,398 @@
+/* ===== Résumé — A4, minimalist editorial, flowing (auto-paginated) ===== */
+
+.resume-screen {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 24px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* toolbar (never captured into the PDF) */
+.resume-bar {
+  width: 210mm;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.resume-back {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.resume-back:hover {
+  color: var(--ink);
+}
+
+.resume-dl {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--paper);
+  background: var(--ink);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.resume-dl:hover {
+  opacity: 0.88;
+}
+
+.resume-dl:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* screen sheet: white paper look with vertical padding */
+.resume-sheet {
+  width: 210mm;
+  max-width: 100%;
+  background: #ffffff;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.12);
+  padding: 14mm 0;
+  box-sizing: border-box;
+}
+
+/* captured node: only horizontal padding (PDF vertical margins come from the
+   html2pdf `margin` option, so every page gets even spacing) */
+.resume-doc {
+  padding: 0 18mm;
+  color: #1c1b19;
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ---------- header ---------- */
+.rs-head {
+  display: grid;
+  grid-template-columns: 28mm 1fr;
+  gap: 9mm;
+  align-items: center;
+  padding-bottom: 6mm;
+  border-bottom: 1.5px solid #1c1b19;
+}
+
+.rs-photo {
+  width: 28mm;
+  height: 34mm;
+  border-radius: 3px;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    -45deg,
+    #eceae4,
+    #eceae4 8px,
+    #f2f0eb 8px,
+    #f2f0eb 16px
+  );
+  border: 1px solid #dfdbd2;
+}
+
+.rs-name {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.rs-title {
+  margin-top: 7px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.rs-contact {
+  margin-top: 11px;
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.rs-sep {
+  color: #c9c4ba;
+}
+
+/* ---------- blocks ---------- */
+.rs-block {
+  margin-top: 7mm;
+}
+
+.rs-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 3mm;
+  margin-bottom: 4.5mm;
+  border-bottom: 1px solid var(--line);
+  break-after: avoid;
+}
+
+.rs-summary {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 300;
+  color: #2c2a26;
+  text-wrap: pretty;
+}
+
+/* ---------- experience ---------- */
+.rs-exp {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.rs-exp-item {
+  display: grid;
+  grid-template-columns: 30mm 1fr;
+  gap: 6mm;
+  break-inside: avoid;
+}
+
+.rs-exp-date {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  padding-top: 2px;
+}
+
+.rs-exp-role {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.rs-exp-org {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.rs-exp-desc {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* ---------- skills ---------- */
+.rs-skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7mm;
+}
+
+.rs-skill-col {
+  break-inside: avoid;
+}
+
+.rs-skill-head {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 3mm;
+  padding-bottom: 2mm;
+  border-bottom: 1px solid var(--line);
+}
+
+.rs-skill-list {
+  margin: 0;
+  padding-left: 15px;
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--ink-mute);
+}
+
+.rs-skill-list li {
+  margin: 0;
+}
+
+/* ---------- selected work ---------- */
+.rs-work {
+  display: flex;
+  flex-direction: column;
+}
+
+.rs-work-item {
+  padding: 3.5mm 0;
+  border-bottom: 1px solid var(--line);
+  break-inside: avoid;
+}
+
+.rs-work-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rs-work-item:first-child {
+  padding-top: 0;
+}
+
+.rs-work-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.rs-work-title {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.rs-work-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--muted-2);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.rs-work-desc {
+  margin: 3px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* ---------- education + certs ---------- */
+.rs-edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  align-items: start;
+}
+
+.rs-edu-item {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #3a3833;
+}
+
+.rs-edu-year {
+  color: var(--muted-2);
+}
+
+.rs-certs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: flex-start;
+}
+
+.rs-chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 10.5px;
+  color: #3a3833;
+}
+
+/* ---------- footer ---------- */
+.rs-foot {
+  margin-top: 9mm;
+  padding-top: 4mm;
+  border-top: 1.5px solid #1c1b19;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.rs-foot-contact {
+  color: var(--ink);
+}
+
+/* ---------- photo component (shared) ---------- */
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--muted);
+}
+
+.photo-monogram {
+  font-family: var(--serif);
+  font-size: 30px;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
+.photo-hint {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--muted-2);
+  text-align: center;
+  padding: 0 4px;
+}
+
+/* ---------- responsive (screen only) ---------- */
+@media (max-width: 820px) {
+  .resume-bar,
+  .resume-sheet {
+    width: 100%;
+  }
+  .resume-sheet {
+    padding: 22px 0;
+  }
+  .resume-doc {
+    padding: 0 22px;
+  }
+  .rs-head {
+    grid-template-columns: 24mm 1fr;
+    gap: 16px;
+  }
+  .rs-name {
+    font-size: 27px;
+  }
+  .rs-skills {
+    grid-template-columns: 1fr;
+    gap: 5mm;
+  }
+  .rs-exp-item {
+    grid-template-columns: 26mm 1fr;
+    gap: 4mm;
+  }
+  .rs-edu-grid {
+    grid-template-columns: 1fr;
+    gap: 5mm;
+  }
+  .rs-foot {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
