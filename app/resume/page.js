@@ -159,9 +159,7 @@ export default function Resume() {
           </section>
 
           <footer className="rs-foot">
-            <span>
-              Open to Forward Deployed Engineering &amp; AI leadership roles
-            </span>
+
             <span className="rs-foot-contact">
               {PROFILE.email} · {PROFILE.linkedinLabel}
             </span>

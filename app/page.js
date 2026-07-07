@@ -17,7 +17,7 @@ export default function Home() {
         <header className="hero">
           <div className="hero-copy">
             <div className="hero-kicker">
-              FORWARD DEPLOYED ENGINEER · HEAD OF AI · HANDS-ON LEADER
+              FORWARD DEPLOYED ENGINEER · HEAD OF AI · HANDS-ON LEADER FULLSTACK
             </div>
             <h1 className="hero-name">
               Luiz <em>Vieira</em>
@@ -159,9 +159,7 @@ export default function Home() {
         <footer className="footer">
           <div>
             <div className="footer-title">Let&rsquo;s talk.</div>
-            <div className="footer-sub">
-              Open to Forward Deployed Engineering & AI leadership roles.
-            </div>
+
           </div>
           <div className="footer-actions">
             <a className="btn btn-primary" href={`mailto:${PROFILE.email}`}>
